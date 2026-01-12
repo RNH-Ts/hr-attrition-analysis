@@ -77,7 +77,7 @@ Use exploratory visualizations to identify patterns and group-level differences 
 - Attrition rates are visibly higher among employees who:
   - Work overtime
   - Are younger or at earlier career stages
-  - Belong to certain job roles and departments
+  - Belong to certain job roles (Sales) and not the department with the most overall employees (Research & Development).
 - Lower job satisfaction is associated with higher observed attrition
 - Linear correlation analysis does not reveal strong relationships with attrition, suggesting that:
   - Key effects are likely non-linear
@@ -87,21 +87,40 @@ At this stage, the analysis highlights where attrition appears in the data, whil
 
 ---
 
-### 3. Machine Learning & Feature Importance  
-**`03_HR_Retention_ML.ipynb`**
+## Day 3 — Machine Learning & Feature Importance  
+**Notebook:** `03_HR_Retention_ML.ipynb`
 
-Key takeaways from modeling:
-- **OverTime is the dominant predictor of attrition**, clearly outranking all other features
-- Career and compensation variables form the second tier of importance:
-  -
-  - MonthlyIncome
-  - JobLevel
-  - Age
-  - TotalWorkingYears
-- Variables that looked important in EDA (e.g. department, marital status, specific roles) contribute **far less** once multivariate relationships are learned
-- The model shifts the explanation of attrition from *who people are* to *how they work and where they are in their career*
+**Objective:**  
+Evaluate multiple machine learning models for employee attrition and examine how feature relevance differs across modeling approaches.
+ and identify which factors remain important once multivariate and non-linear relationships are learned
 
-This notebook reframes attrition as a **workload–career stage problem**, not primarily a demographic or organizational grouping problem.
+**Modeling Summary:**
+- Three models were trained and compared: Logistic Regression, Decision Tree, and Random Forest
+- Performance was evaluated using accuracy, precision, recall, and F1 score for the attrition class
+- Random Forest achieved the strongest overall performance, with the highest accuracy, precision, and F1 score
+- Logistic Regression showed higher recall for attrition, indicating better sensitivity but weaker overall balance
+- 
+- Random Forest achieved the strongest overall balance of performance metrics
+- Logistic Regression showed higher recall for attrition, indicating greater sensitivity to identifying employees who leave
+- Decision Tree underperformed relative to the other models
+
+**Feature Signals Across Models:**
+- Linear correlation analysis shows no strong relationships with attrition, reinforcing earlier findings that attrition is not driven by simple linear effects
+- Feature importance varies by model, reflecting differences in how each method captures structure in the data
+- In the Random Forest model specifically:
+  - **WorkLifeStress** and **OverTime** appear among the most influential predictors
+  - Compensation-related features (e.g., MonthlyIncome, Income per Experience) also rank highly despite weak linear correlations
+- Several variables that appeared visually salient during EDA contribute less consistently once modeled jointly
+
+This notebook highlights that attrition drivers are **model-dependent and non-linear**, and that no single feature dominates across all analytical perspectives.
+
+
+This notebook demonstrates how predictive modeling reframes attrition from surface-level group differences to underlying workload and career progression dynamics.
+
+
+
+
+
 
 ---
 
@@ -143,72 +162,10 @@ Explicit design choice:
 
 This is an analysis project, not a dashboard-first project.
 
----
-
-## Author
-**Rachel Hill-Tsarpelas**  
-Data Analyst | Python | EDA | Machine Learning
-
 
 
 
 ---
-
-## Project Structure & Notebooks
-
-### Day 1 – Data Overview & Problem Understanding  
-**`01_HR_Retention_Overview.ipynb`**
-
-Focus:
-- Introduction to the business problem
-- Dataset inspection and structure
-- Understanding key variables and data types
-- Initial observations relevant for later visualization and modeling
-
-Outcome:
-- Solid understanding of the dataset
-- Identification of variables likely to influence attrition
-- Preparation for focused exploratory analysis
-
----
-
-### Day 2 – Exploratory Data Analysis & Visualization  
-**`02_HR_Retention_Visualizations.ipynb`**
-
-Focus:
-- Exploratory data analysis using visualizations
-- Attrition patterns across departments, roles, and marital status
-- Analysis of work-life balance, overtime, and job-related stress
-- Correlation analysis and feature relevance
-
-Outcome:
-- Employees working overtime show a clearly higher attrition rate in the visual analysis.
-- Attrition is visually concentrated among younger employees and lower job levels, decreasing steadily with increasing seniority.
-- Department, job role, and marital-status plots show strong separation, indicating apparent group-level attrition differences in univariate views.
-
----
-
-### Day 3 – Machine Learning & Prediction  
-**`03_HR_Retention_ML.ipynb`**
-
-Focus:
-- Data preprocessing and feature preparation
-- Handling numerical and categorical variables
-- Addressing class imbalance
-- Training and evaluating machine learning models
-
-Outcome:
-- Predictive modeling of employee attrition
-- Evaluation of model performance
-- Interpretation of results to support preventive HR actions
-
----
-
-## Key Insights
-- Attrition is strongly associated with **overtime**, **work-life stress**, and **marital status**
-- Employees in **sales-related roles** show elevated attrition risk
-- Combining demographic and job-related features improves predictive power
-- The analysis highlights where **targeted, proactive HR interventions** may be most effective
 
 ---
 
@@ -256,59 +213,10 @@ This comparison highlights the importance of combining visual exploration with p
 
 
 
----
-
-## Day 2 — Exploratory Visualizations
-
-**Purpose:**  
-Explore the data visually to identify patterns and understand which features relate to attrition.  
-
-**What was done:**
-
-- **Target Distribution:** Count of employees who left vs stayed  
-- **Univariate Visualizations:** Histograms for age, income, and numeric features  
-- **Target-Conditioned Visualizations:**  
-  - Attrition vs Overtime  
-  - Attrition vs Age  
-  - JobRole counts (top 5 roles)  
-  - Department counts  
-- **Boxplots and Correlation Analysis:** Age vs Attrition, heatmap of numeric correlations  
-
-**Key Insights (examples):**
-
-- Employees working overtime have higher attrition rates  
-- Certain departments and job roles show higher attrition percentages  
-- Age and income distributions differ between employees who stayed and those who left  
-
-**Files Produced:**
-
-- `02_visualizations.ipynb` — notebook with plots and observations  
 
 ---
 
-## Day 3 — Feature Engineering
 
-**Purpose:**  
-Create new features to capture employee behavior and improve potential modeling.  
-
-**New Features Created:**
-
-1. **Work_Life_Stress:** Combines overtime, distance from home, and work-life balance rating  
-2. **Career_Speed:** Ratio of years at company to age  
-3. **Age_Group:** Categorizes employees into age ranges  
-4. **Income_Per_Year:** Annual income from monthly salary  
-5. **Income_Per_Experience:** Annual income relative to total years worked  
-6. **Manager_Dependency:** Ratio of years with current manager to total years at company  
-
-**Notes:**
-
-- Features were created manually using simple, readable Python code  
-- Each feature has a clear rationale for how it may relate to attrition  
-
-**Files Produced:**
-
-- `03_feature_engineering.ipynb` — notebook with feature creation  
-- `data/processed_hr_for_modeling.csv` — final dataset with engineered features  
 
 ---
 
