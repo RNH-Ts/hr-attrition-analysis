@@ -133,7 +133,149 @@ This comparison demonstrates why attrition analysis cannot rely on dashboards al
 
 ---
 
-## Power BI Dashboard (Planned)
+## Power BI Dashboard 
+## Power BI Dashboard — Operationalizing Attrition Risk
+
+### Objective
+
+While the Python notebooks focus on exploratory analysis, feature relationships, and predictive modeling, the Power BI page is designed to **operationalize those findings**.
+
+Rather than repeating EDA-style charts, the dashboard answers a different question:
+
+> **Where should HR focus attention right now to reduce attrition risk?**
+
+The emphasis is on **rates over counts**, **interaction over static views**, and **risk concentration rather than averages**.
+
+---
+
+### Design Principles
+
+The Power BI page was intentionally built as a **single, focused analytical view**, not a multi-page reporting dashboard.
+
+Key design principles include:
+
+- **Alignment with machine learning findings**  
+  Visuals prioritize workload, stress, compensation, and role-level effects — the same drivers identified by the Random Forest model.
+
+- **Rates over raw counts**  
+  Attrition rate is emphasized to avoid misleading conclusions driven by group size alone.
+
+- **Interactive context**  
+  KPIs and visuals update dynamically based on slicers, enabling targeted exploration by gender and job role.
+
+- **Avoidance of redundant visuals**  
+  Aggregations that duplicated information across visuals were intentionally removed to maintain analytical clarity.
+
+---
+
+### Key Visuals & Rationale
+
+**KPI Summary (Top Panel)**  
+- Headcount  
+- Attrition Rate (filtered)  
+- Average Work-Life Stress (filtered)  
+
+These KPIs provide immediate context and reinforce that all insights are filter-aware.
+
+---
+
+**Attrition Rate & Headcount by Job Role (Bar + Line Chart)**  
+This visual identifies job roles that combine:
+- Elevated attrition risk (rate)
+- Meaningful organizational impact (headcount)
+
+This distinction supports prioritization:  
+high attrition in small roles signals niche risk, while moderate attrition in large roles signals broader operational risk.
+
+---
+
+**Compensation × Stress × Attrition (Scatter Plot)**  
+This multivariate view explores the interaction between:
+- Monthly income
+- Work-life stress
+- Attrition concentration
+
+Bubble size encodes attrition count, while color represents stress bands, revealing non-linear patterns consistent with machine learning findings.
+
+---
+
+**Attrition by Stress Band (Bar Chart)**  
+This chart demonstrates that attrition accelerates once stress crosses defined thresholds, reinforcing the conclusion that stress acts as a non-linear driver rather than a gradual linear factor.
+
+---
+
+**Department × Overtime Attrition Matrix (Heatmap)**  
+This matrix provides an operational view of attrition risk by combining departmental context with workload pressure.
+
+Conditional formatting highlights attrition hotspots where overtime and turnover coincide — an insight that static Python charts are less effective at conveying.
+
+---
+
+### Relationship to Machine Learning Results
+
+A central outcome of this project is the contrast between **visual intuition** and **model-based evidence**.
+
+While some variables appear visually prominent in isolation (e.g., department or demographic groupings), machine learning models consistently assign greater importance to:
+
+- Workload indicators (Overtime, Work-Life Stress)
+- Compensation-related features
+- Career stage variables
+
+The Power BI dashboard reflects this distinction by treating departments and demographics as **contextual filters**, while positioning workload and stress as **primary explanatory drivers**.
+
+---
+
+### What This Dashboard Does *Not* Show
+
+To maintain analytical integrity, the dashboard intentionally avoids:
+
+- **Raw attrition counts without context**  
+  Counts alone can overemphasize large groups and obscure true risk.
+
+- **Correlation-only visuals**  
+  Visual patterns are not presented as causal explanations without model support.
+
+- **Per-employee prediction or scoring**  
+  The dashboard focuses on group-level risk concentration, not individual attrition prediction.
+
+- **Overly granular slicing**  
+  Excessive breakdowns that add noise without improving decision-making were deliberately excluded.
+
+---
+
+### Takeaway
+
+The Power BI dashboard does not attempt to validate the machine learning models directly.  
+Instead, it translates model insights into a **decision-oriented, interactive view** that helps HR stakeholders identify where attrition risk is most concentrated and actionable.
+
+## Power BI Dashboard — Attrition Risk in Context
+
+The Power BI dashboard complements the Python analysis by translating modeling insights into an **interactive, decision-oriented view**.
+
+Rather than replicating EDA visuals, the dashboard focuses on:
+
+- Attrition **rates** rather than raw counts
+- Workload, stress, and compensation — the strongest model-supported drivers
+- Risk **concentration**, not averages
+
+Key visuals include:
+- Job role–level attrition rate and headcount for prioritization
+- A compensation × stress × attrition scatter plot highlighting non-linear patterns
+- A department × overtime heatmap identifying attrition hotspots
+- Stress-band analysis showing threshold effects
+
+Departments and demographics are treated as **contextual filters**, while workload and stress are positioned as primary explanatory factors.
+
+### What the Dashboard Does Not Show
+- Raw attrition counts without normalization
+- Correlation-only visuals presented as causal evidence
+- Individual-level attrition prediction
+- Excessive slicing that adds noise without insight
+
+The result is a focused Power BI page that operationalizes machine learning findings for HR decision-making.
+
+
+(Planned)
 The Power BI dashboard will be designed to reflect this distinction between EDA and machine learning findings.
 
 **Dashboard design principles:**  
