@@ -12,7 +12,7 @@ from understanding the business problem, through exploratory analysis, to predic
 
 ## Business Problem
 Employee attrition represents a significant cost and organizational challenge.  
-The objective of this project is to understand **why employees leave**, **which factors are most strongly associated with attrition**, and **how data-driven insights can support targeted retention strategies**.
+The objective of this project is to understand why employees leave, which factors are most strongly associated with attrition, and how data-driven insights can support targeted retention strategies.
 
 ---
 
@@ -52,15 +52,15 @@ Establish a high-level understanding of the HR attrition dataset and identify va
 
 **Key Findings:**  
 - The dataset is clean, structured, and requires minimal preprocessing  
-- Employee attrition is a **minority class (~16%)**, which will need to be addressed during modeling  
+- Employee attrition is a minority class (~16%), which will need to be addressed during modeling  
 - Features naturally group into interpretable domains:  
-  - **Career stage:** Age, JobLevel, TotalWorkingYears  
-  - **Compensation:** MonthlyIncome  
-  - **Work conditions:** OverTime, WorkLifeBalance  
-- Several features are **highly correlated** (e.g., JobLevel, Income, Experience), which has implications for interpretation later  
+  - Career stage: Age, JobLevel, TotalWorkingYears  
+  - Compensation: MonthlyIncome  
+  - Work conditions: OverTime, WorkLifeBalance  
+- Several features are highly correlated (e.g., JobLevel, Income, Experience), which has implications for interpretation later  
 - Some numerically encoded variables (e.g., Education, WorkLifeBalance) are categorical in nature and will be treated accordingly  
 
-This notebook establishes **which variables are plausible drivers**, without making claims about importance yet.
+This notebook establishes which variables are plausible drivers, without making claims about importance yet.
 
 ---
 
@@ -101,11 +101,11 @@ Evaluate multiple machine learning models for employee attrition and identify wh
 - Linear correlation analysis shows no strong relationships with attrition, reinforcing earlier findings that attrition is not driven by simple linear effects  
 - Feature importance varies by model, reflecting differences in how each method captures structure in the data  
 - In the Random Forest model specifically:  
-  - **WorkLifeStress** and **OverTime** appear among the most influential predictors  
+  - WorkLifeStress and OverTime appear among the most influential predictors  
   - Compensation-related features (e.g., MonthlyIncome, Income per Experience) also rank highly despite weak linear correlations  
 -  EDA-only patterns (department, age, marital status) appear visually strong but are less predictive once modeled jointly
 
-This notebook highlights that attrition drivers are **model-dependent and non-linear**, and that no single feature dominates across all analytical perspectives.
+This notebook highlights that attrition drivers are model-dependent and non-linear, and that no single feature dominates across all analytical perspectives.
 
 ---
 ## Model Performance
@@ -126,7 +126,7 @@ This notebook highlights that attrition drivers are **model-dependent and non-li
 ---
 
 ## EDA vs. Machine Learning Perspective
-A key outcome of this project is the distinction between **visual intuition** and **model-based evidence**.
+A key outcome of this project is the distinction between visual intuition and model-based evidence.
 
 - Exploratory visualizations highlight departments, roles, and demographic groups because these are easy to compare visually  
 - However, machine learning results show that many of these apparent effects are absorbed by variables related to:  
@@ -137,9 +137,9 @@ A key outcome of this project is the distinction between **visual intuition** an
 Once these factors are accounted for, several demographic and organizational variables lose predictive importance.  
 
 This comparison demonstrates why attrition analysis cannot rely on dashboards alone:  
-**strong-looking visual patterns do not necessarily translate into predictive importance.**
+- strong-looking visual patterns do not necessarily translate into predictive importance.
 
-The Power BI dashboard reflects this distinction by treating departments and demographics as **contextual filters**, while positioning workload and stress as **primary explanatory drivers**.
+The Power BI dashboard reflects this distinction by treating departments and demographics as contextual filters, while positioning workload and stress as primary explanatory drivers.
 
 ---
 
@@ -147,7 +147,7 @@ The Power BI dashboard reflects this distinction by treating departments and dem
 
 ### Objective
 
-While the Python notebooks focus on exploratory analysis, feature relationships, and predictive modeling, the **Power BI dashboard** is designed to **operationalize** those findings. It answers the critical question:  
+While the Python notebooks focus on exploratory analysis, feature relationships, and predictive modeling, the Power BI dashboard is designed to operationalize those findings. It answers the critical question:  
 
 > **Where should HR focus attention to reduce attrition risk?**
 
@@ -157,10 +157,10 @@ While the Python notebooks focus on exploratory analysis, feature relationships,
 
 The interactive dashboard moves beyond replicating EDA charts. Its design focuses on:
 
-- **Attrition rates** rather than raw counts
-- **Workload**, **stress**, and **compensation** — the strongest predictors from machine learning models
-- **Risk concentration** over averages
-- **Dynamic visuals** and **KPIs** for slicers such as **gender** and **job role**
+- Attrition rates rather than raw counts
+- Workload, stress, and compensation — the strongest predictors from machine learning models
+- Risk concentration over averages
+- Dynamic visuals and KPIs for slicers such as gender and job role
 
 ---
 
@@ -172,29 +172,29 @@ The interactive dashboard moves beyond replicating EDA charts. Its design focuse
   - **Average Work-Life Stress** (filtered)
 
 - **Bar + Line Combo**:  
-  - **Job Role** → **Total Employees** + **Attrition Rate**  
+  - Job Role → Total Employees + Attrition Rate  
   This chart shows the relationship between job roles, total employees, and their attrition rates, enabling HR to prioritize roles with both high attrition and significant workforce size.
 
 - **Scatter Plot**:  
-  - **Monthly Income** vs **WorkLifeStress** → **Attrition size**  
+  - Monthly Income vs WorkLifeStress → Attrition size  
   This plot highlights the interaction between income, stress levels, and attrition. The **bubble size** represents the number of employees in each point, and the **color** denotes stress bands.
 
 - **Stress Band**:  
-  A **bar chart** showing total attrition by **stress levels**. This visual emphasizes the non-linear relationship between stress and attrition, where higher stress levels are linked to a **sharp increase in attrition risk**.
+  A bar chart showing total attrition by stress levels. This visual emphasizes the non-linear relationship between stress and attrition, where higher stress levels are linked to a sharp increase in attrition risk.
 
 - **Small Multiples**:  
-  A **marital status bar chart**, providing a breakdown of attrition rates by marital status across various filters.
+  A marital status bar chart, providing a breakdown of attrition rates by marital status across various filters.
 
 - **Department × Overtime Attrition Matrix**:  
-  A **heatmap** visualizing the interaction between department and overtime, highlighting areas with both high overtime and high attrition.
+  A heatmap visualizing the interaction between department and overtime, highlighting areas with both high overtime and high attrition.
 
 ---
 
 ### Data Preparation & Measures
 
-Data was prepped using **Power Query** to clean and standardize columns (e.g., fixing decimals, renaming). New columns were created for visual clarity, such as **shortened names** and **stress level bins**.
+Data was prepped using Power Query to clean and standardize columns (e.g., fixing decimals, renaming). New columns were created for visual clarity, such as shortened names and stress level bins.
 
-**DAX Measures** were written for dynamic calculations, and these measures were stored in a separate table for best practice. Instead of creating an artificial **star schema**, the model retained simplicity and clarity, ensuring the dashboard remained intuitive for HR professionals.
+**DAX Measures** were written for dynamic calculations, and these measures were stored in a separate table for best practice. Instead of creating an artificial star schema, the model retained simplicity and clarity, ensuring the dashboard remained intuitive for HR professionals.
 
 ---
 
@@ -202,34 +202,34 @@ Data was prepped using **Power Query** to clean and standardize columns (e.g., f
 
 The dashboard design integrates insights from exploratory data analysis (EDA) and machine learning (ML) models to provide actionable HR insights. It focuses on identifying where attrition risk is highest and guiding targeted retention efforts.
 
-- **Stress Levels by Department**: Initial donut visuals showed uniform stress levels across departments. However, combining **compensation**, **job roles**, and **overtime** highlighted stress as a critical driver when these factors interact.
+- **Stress Levels by Department**: Initial donut visuals showed uniform stress levels across departments. However, combining compensation, job roles, and overtime highlighted stress as a critical driver when these factors interact.
 
-- **Compensation vs. Stress Scatter Plot**: This visual illustrates the non-linear relationship between **work-life stress** and **compensation**. Higher attrition correlates with higher stress and either low or high compensation, reflecting the ML model’s findings.
+- **Compensation vs. Stress Scatter Plot**: This visual illustrates the non-linear relationship between work-life stress and compensation. Higher attrition correlates with higher stress and either low or high compensation, reflecting the ML model’s findings.
 
-- **Role in EDA**: **Sales roles** were flagged as high-risk in EDA, even though ML didn’t prioritize them. They are included as contextual filters to enable deeper exploration by HR.
+- **Role in EDA**: *Sales roles were flagged as high-risk in EDA, even though ML didn’t prioritize them. They are included as contextual filters to enable deeper exploration by HR.
 
 ### How Visuals Support HR Decision-Making
 The visuals are designed to help HR prioritize areas for intervention:
-- **High-Risk Roles & Departments**: The scatter plot and bar charts identify job roles and departments with high attrition risk, based on **workload**, **stress**, and **compensation**.
-- **Tailored Retention Strategies**: Slicers (e.g., **gender**, **job role**) enable HR to drill down into specific demographics, helping tailor retention strategies based on **stress** or **compensation** disparities.
+- High-Risk Roles & Departments: The scatter plot and bar charts identify job roles and departments with high attrition risk, based on workload, stress, and compensation.
+- Tailored Retention Strategies: Slicers (e.g., gender, job role) enable HR to drill down into specific demographics, helping tailor retention strategies based on stress or compensation disparities.
 - The scatter plot and stress band show that high stress and low compensation drive attrition, enabling HR to target retention strategies based on these insights.
 - The job role attrition chart helps HR prioritize roles with both high attrition and large headcounts, ensuring retention efforts are impactful.
 
-This ensures the dashboard directly supports **data-driven HR decision-making**.
+This ensures the dashboard directly supports data-driven HR decision-making.
 
 ---
 
 ### Summary & Key Takeaways
 
-The **Power BI dashboard** serves as an interactive tool to operationalize the findings from **EDA** and **machine learning**. It answers the critical question:  
+The Power BI dashboard serves as an interactive tool to operationalize the findings from EDA and machine learning. It answers the critical question:  
 > **Where should HR focus attention to reduce attrition risk?**
 
 - **Key Insights**:  
-  - Focus on **workload** (overtime), **stress**, and **compensation** as primary drivers of attrition risk.
-  - Use **contextual slicers** (e.g., role, department, gender) to fine-tune retention strategies.
-  - Prioritize high-risk **job roles** and departments with **elevated attrition**.
+  - Focus on workload (overtime), stress, and compensation as primary drivers of attrition risk.
+  - Use contextual slicers (e.g., role, department, gender) to fine-tune retention strategies.
+  - Prioritize high-risk job roles and departments with elevated attrition.
 
-This makes the **dashboard** a **dynamic decision-support tool** for HR, guiding them in identifying and addressing attrition hotspots effectively.
+This makes the dashboard a dynamic decision-support tool for HR, guiding them in identifying and addressing attrition hotspots effectively.
 
 ---
 
@@ -239,10 +239,10 @@ This makes the **dashboard** a **dynamic decision-support tool** for HR, guiding
    During preprocessing, I initially scaled features in the wrong order, which affected the results. After identifying this, I corrected the scaling order in the pipeline, ensuring the models could learn from the data correctly.
 
 2. **Handling Missing Data (NAs)**:  
-   A divide-by-zero error introduced unexpected `NaN` values in certain columns. I handled this by implementing checks to **avoid division by zero** in the pipeline, ensuring no missing data affected the model.
+   A divide-by-zero error introduced unexpected `NaN` values in certain columns. I handled this by implementing checks to avoid division by zero in the pipeline, ensuring no missing data affected the model.
 
 3. **Data Cleaning Limitations**:  
-   While the data was cleaned for the purpose of this analysis, it was **artificially pre-processed** before being imported. Although this was necessary for quick analysis, it did not showcase my full **data cleaning capabilities**, which could have been demonstrated with more involved preprocessing.
+   While the data was cleaned for the purpose of this analysis, it was artificially pre-processed before being imported. Although this was necessary for quick analysis, it did not showcase my full data cleaning capabilities, which could have been demonstrated with more involved preprocessing.
 
 ---
 
